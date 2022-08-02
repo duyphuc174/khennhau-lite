@@ -9,19 +9,31 @@
         </p>
     </div>
 
-    <div class="login__intro">
-        <p class="login__intro-content">
+    <div class="login__message">
+        <p class="login__message-slogan">
             Bắt đầu xây dựng văn hóa lòng biết ơn cho tổ chức của bạn ngay hôm nay
         </p>
+        <!-- <p class="login__message-error">
+            Thông tin đăng nhập không chính xác
+        </p> -->
     </div>
 
     <div class="login__form">
-        <form action="" class="login__form-group">
+        <form action="" class="login__form-group" [formGroup]="loginForm">
 
             <label for="" class="login__form-label">
                 Email đăng nhập
             </label>
-            <input type="text" class="login__form-control">
+            <input type="text" class="login__form-control" formControlName="username">
+
+            <div class="login__form-alert" *ngIf="checkValueError('username')">
+                <div class="login__form-error" *ngIf="validate('username', 'required')">
+                    <p class="alert">Email không được để trống</p>
+                </div>
+                <div class="login__form-error" *ngIf="validate('username', 'email')">
+                    <p class="alert">Email không hợp lệ</p>
+                </div>
+            </div>
 
             <label for="" class="login__form-label">
                 Mật khẩu 
@@ -29,9 +41,21 @@
                     Quên mật khẩu ?
                 </a>
             </label>
-            <input type="text" class="login__form-control">
+            <input type="password" class="login__form-control" formControlName="password">
 
-            <button class="login__form-submit">
+            <div class="login__form-alert" *ngIf="checkValueError('password')">
+                <div class="login__form-error" *ngIf="validate('password', 'required')">
+                    <p class="alert">Mật khẩu không được để trống</p>
+                </div>
+                <div class="login__form-error" *ngIf="validate('password', 'minlength')">
+                    <p class="alert">Mật khẩu không được ít hơn {{password?.errors?.['minlength'].requiredLength}} ký tự</p>
+                </div>
+                <div class="login__form-error" *ngIf="validate('password', 'maxlength')">
+                    <p class="alert">Mật khẩu không được nhiều hơn {{password?.errors?.['minlength'].requiredLength}} ký tự</p>
+                </div>
+            </div>
+
+            <button class="login__form-submit" type="button" (click)="submit()">
                 Đăng nhập
             </button>
         </form>
