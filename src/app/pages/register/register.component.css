@@ -1,4 +1,4 @@
-.login {
+.register {
     margin: 100px 0;
     width: 500px;
     height: 100%;
@@ -10,14 +10,14 @@
     box-shadow: 0px 0px 2px #000;
 }
 
-.login__header-title {
+.register__header-title {
     color: #000;
     font-size: 2.2rem;
     font-weight: 600;
     text-align: center;
 }
 
-.login__header-description {
+.register__header-description {
     text-align: center;
     color: #B5B5C3;
     font-size: 1.6rem;
@@ -25,14 +25,14 @@
     font-weight: 600;
 }
 
-.login__header-title-link {
+.register__header-title-link {
     text-decoration: none;
     font-weight: 500;
     color: #00AAF9;
     font-weight: 600;
 }
 
-.login__message {
+.register__message {
     background-color: #F8F5FF;
     padding: 24px;
     border-radius: 5px;
@@ -40,7 +40,7 @@
     line-height: 20px;
 }
 
-.login__message-slogan {
+.register__message-slogan {
     font-size: 1.4rem;
     color: #9D39EA;
     font-weight: 500;
@@ -50,28 +50,28 @@
     background-color: #FCD9E2;
 }
 
-.login__message-error {
+.register__message-error {
     font-size: 1.4rem;
     color: #912741;
     font-weight: 500;
 }
 
-.login__form {
+.register__form {
     margin-top: 24px;
 }
 
-.login__form-group {
+.register__form-group {
     display: flex;
     flex-direction: column;
 }
 
-.login__form-label {
+.register__form-label {
     font-size: 1.4rem;
     font-weight: 600;
     margin-top: 16px;
 }
 
-.login__form-control {
+.register__form-control {
     padding: 12px 16px;
     margin: 8px 0;
     border: none;
@@ -83,7 +83,7 @@
     position: relative;
 }
 
-.login__form-control::before {
+.register__form-control::before {
     content: "xin chào";
     position: absolute;
     top: 0;
@@ -92,13 +92,13 @@
     color: red;
 }
 
-.login__form-label-link {
+.register__form-label-link {
     text-decoration: none;
     color: #00AAF9;
     font-weight: 600;
 }
 
-.login__form-submit {
+.register__form-submit {
     padding: 12px;
     background-color: #66C5FA;
     color: #fff;

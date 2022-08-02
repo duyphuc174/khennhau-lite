@@ -1,0 +1,91 @@
+<div class="register">
+    <div class="register__header">
+        <h2 class="register__header-title">
+            {{title}}
+        </h2>
+        <p class="register__header-description">
+            Đã có tài khoản?
+            <a href="#" class="register__header-title-link">Đăng nhập</a>
+        </p>
+    </div>
+
+    <div class="register__form">
+        <form action="" class="register__form-group" [formGroup]="registerForm">
+
+            <label for="" class="register__form-label">
+                Nhập mã công ty/ tổ chức của bạn
+            </label>
+            <input type="text" placeholder="VD: momtech" class="register__form-control" formControlName="joinCode">
+            <div class="register__form-alert" *ngIf="checkValueError('joinCode')">
+                <div class="register__form-error" *ngIf="validate('joinCode', 'required')">
+                    <p class="alert">Mã công ty/ tổ chức không được để trống</p>
+                </div>
+            </div>
+
+            <label for="" class="register__form-label">
+                Họ và tên
+            </label>
+            <input type="text" placeholder="VD: Ngô Đình Huy" class="register__form-control" formControlName="name">
+
+            <div class="register__form-alert" *ngIf="checkValueError('name')" >
+                <div class="register__form-error" *ngIf="validate('name', 'required')">
+                    <p class="alert">Họ và tên không được để trống</p>
+                </div>
+                <div class="register__form-error" *ngIf="validate('name', 'minlength')">
+                    <p class="alert">Tên của bạn phải có ít nhất {{name?.errors?.['minlength'].requiredLength}} ký tự</p>
+                </div>
+            </div>
+
+
+
+            <label for="" class="register__form-label">
+                Email
+            </label>
+            <input type="text" placeholder="Email" class="register__form-control" formControlName="email">
+
+            <div class="register__form-alert" *ngIf="checkValueError('email')" >
+                <div class="register__form-error" *ngIf="validate('email', 'required')">
+                    <p class="alert">Email không được để trống</p>
+                </div>
+                <div class="register__form-error" *ngIf="validate('email', 'email')">
+                    <p class="alert">Email không hợp lệ</p>
+                </div>
+            </div>
+
+            <label for="" class="register__form-label">
+                Mật khẩu
+            </label>
+            <input type="password" placeholder="******" class="register__form-control" formControlName="password">
+
+            <div class="register__form-alert" *ngIf="checkValueError('password')">
+                <div class="register__form-error" *ngIf="validate('password', 'required')">
+                    <p class="alert">Mật khẩu không được để trống</p>
+                </div>
+                <div class="register__form-error" *ngIf="validate('password', 'minlength')">
+                    <p class="alert">Mật khẩu phải có ít nhất {{password?.errors?.['minlength'].requiredLength}} ký tự</p>
+                </div>
+                <div class="register__form-error" *ngIf="validate('password', 'maxlength')">
+                    <p class="alert">Mật khẩu không được nhiều hơn {{password?.errors?.['maxlength'].requiredLength}} ký tự</p>
+                </div>
+            </div>
+
+            <label for="" class="register__form-label">
+                Xác nhận lại mật khẩu
+            </label>
+            <input type="password" placeholder="******" class="register__form-control" formControlName="confirmPassword">
+
+            <div class="register__form-alert" *ngIf="checkValueError('confirmPassword')">
+                <div class="register__form-error" *ngIf="validate('confirmPassword', 'required')">
+                    <p class="alert">Xác nhận mật khẩu là bắt buộc</p>
+                </div>
+                <!-- <div class="register__form-error" >
+                    <p class="alert">Xác nhận lại mật khẩu không trùng khớp</p>
+                </div> -->
+            </div>
+
+            <button class="register__form-submit" type="button" (click)="submit()">
+                Đăng ký
+            </button>
+        </form>
+    </div>
+</div>
