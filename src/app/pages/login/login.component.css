@@ -27,6 +27,7 @@
 
 .login__header-title-link {
     text-decoration: none;
+    cursor: pointer;
     font-weight: 500;
     color: #00AAF9;
     font-weight: 600;

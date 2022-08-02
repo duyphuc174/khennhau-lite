@@ -26,6 +26,7 @@
 }
 
 .register__header-title-link {
+    cursor: pointer;
     text-decoration: none;
     font-weight: 500;
     color: #00AAF9;

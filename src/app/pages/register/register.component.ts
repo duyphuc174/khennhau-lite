@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -22,13 +23,21 @@ export class RegisterComponent implements OnInit {
     confirmPassword: ['', [Validators.required]]
   })
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    
   }
 
   ngDoCheck(): void {
     this.canSubmit()
+  }
+
+  select() {
+    this.router.navigateByUrl('/login')
   }
 
   submit() {
