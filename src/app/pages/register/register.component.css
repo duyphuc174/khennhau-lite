@@ -84,15 +84,6 @@
     position: relative;
 }
 
-.register__form-control::before {
-    content: "xin chào";
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 1.6rem;
-    color: red;
-}
-
 .register__form-label-link {
     text-decoration: none;
     color: #00AAF9;

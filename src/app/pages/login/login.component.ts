@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/api.service';
 import { environment } from 'src/environments/environment';
 import { LoginService, Register } from './login.service';
 
@@ -25,20 +26,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
-    // this.showData()
-    // console.log(this.datas);
-    
   }
-
-  // datas: Register[] = []
-
-  // showData() {
-  //   this.loginService.getData().subscribe(data => this.datas = data)
-  // }
 
   ngDoCheck(): void {
     this.canSubmit()

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService, RegisterRequest } from 'src/app/api.service';
 
 @Component({
   selector: 'app-register',
@@ -9,14 +10,10 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  title = 'Tạo tài khoản'
-
   submitTable = false
-  submitted = false
-  susccessSubmit = false
 
   registerForm = this.fb.group({
-    joinCode: ['', [Validators.required]],
+    join_code: ['', [Validators.required]],
     name: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]],
@@ -25,7 +22,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +32,9 @@ export class RegisterComponent implements OnInit {
 
   ngDoCheck(): void {
     this.canSubmit()
+    
+    console.log(this.checkConfirmPassword());
+    
   }
 
   select() {
@@ -42,7 +43,8 @@ export class RegisterComponent implements OnInit {
 
   submit() {
     if(this.submitTable) {
-      console.log('submitted');
+      console.log(this.registerForm.value);
+      this.apiService.register(this.registerForm.value as RegisterRequest)
     }
   }
 
@@ -70,8 +72,12 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get(value)?.errors?.[rule]
   }
 
+  checkConfirmPassword() {
+    return this.password?.value === this.confirmPassword?.value
+  }
+
   get joinCode() {
-    return this.registerForm.get('joinCode')
+    return this.registerForm.get('join_code')
   }
 
   get name() {

@@ -1,7 +1,7 @@
 <div class="register">
     <div class="register__header">
         <h2 class="register__header-title">
-            {{title}}
+            Tạo tài khoản
         </h2>
         <p class="register__header-description">
             Đã có tài khoản?
@@ -15,9 +15,9 @@
             <label for="" class="register__form-label">
                 Nhập mã công ty/ tổ chức của bạn
             </label>
-            <input type="text" placeholder="VD: momtech" class="register__form-control" formControlName="joinCode">
-            <div class="register__form-alert" *ngIf="checkValueError('joinCode')">
-                <div class="register__form-error" *ngIf="validate('joinCode', 'required')">
+            <input type="text" placeholder="VD: momtech" class="register__form-control" formControlName="join_code">
+            <div class="register__form-alert" *ngIf="checkValueError('join_code')">
+                <div class="register__form-error" *ngIf="validate('join_code', 'required')">
                     <p class="alert">Mã công ty/ tổ chức không được để trống</p>
                 </div>
             </div>
@@ -78,9 +78,9 @@
                 <div class="register__form-error" *ngIf="validate('confirmPassword', 'required')">
                     <p class="alert">Xác nhận mật khẩu là bắt buộc</p>
                 </div>
-                <!-- <div class="register__form-error" >
-                    <p class="alert">Xác nhận lại mật khẩu không trùng khớp</p>
-                </div> -->
+            </div>
+            <div class="register__form-error" *ngIf="!checkConfirmPassword() && confirmPassword?.touched">
+                <p class="alert">Xác nhận lại mật khẩu không trùng khớp</p>
             </div>
 
             <button class="register__form-submit" type="button" (click)="submit()">
