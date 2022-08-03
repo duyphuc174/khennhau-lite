@@ -11,6 +11,11 @@ export interface RegisterRequest {
   join_code: string
 }
 
+export interface Account {
+  email: string
+  password: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,16 +24,12 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<RegisterRequest[]> {
-    return this.http.get<RegisterRequest[]>(this.post(''))
+  login(account: Account): Observable<any> {
+    return this.http.post(this.post('/token'), account)
   }
 
-  login() {
-    
-  }
-
-  register(post: RegisterRequest): Observable<RegisterRequest> {
-    return this.http.post<RegisterRequest>(this.post('/register'), post)
+  register(post: RegisterRequest): Observable<any> {
+    return this.http.post(this.post('/register'), post)
   }
 
   post(path: string) {

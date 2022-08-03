@@ -10,8 +10,6 @@ import { ApiService, RegisterRequest } from 'src/app/api.service';
 })
 export class RegisterComponent implements OnInit {
 
-  submitTable = false
-
   registerForm = this.fb.group({
     join_code: ['', [Validators.required]],
     name: ['', [Validators.required, Validators.minLength(2)]],
@@ -30,38 +28,14 @@ export class RegisterComponent implements OnInit {
     
   }
 
-  ngDoCheck(): void {
-    this.canSubmit()
-    
-    console.log(this.checkConfirmPassword());
-    
-  }
-
-  select() {
+  navigateToLogin() {
     this.router.navigateByUrl('/login')
   }
 
   submit() {
-    if(this.submitTable) {
-      console.log(this.registerForm.value);
-      this.apiService.register(this.registerForm.value as RegisterRequest)
-    }
+    console.log(this.registerForm.value);
+    this.apiService.register(this.registerForm.value as RegisterRequest).subscribe(console.log)
   }
-
-  canSubmit() {
-    if(
-      this.joinCode?.errors ||
-      this.name?.errors ||
-      this.email?.errors ||
-      this.password?.errors ||
-      this.confirmPassword?.errors
-    ) {
-      this.submitTable = false
-    } else {
-      this.submitTable = true
-    }
-  }
-
   
   checkValueError(value: string) {
     return this.registerForm.get(value)?.invalid && 
@@ -73,26 +47,7 @@ export class RegisterComponent implements OnInit {
   }
 
   checkConfirmPassword() {
-    return this.password?.value === this.confirmPassword?.value
+    return this.registerForm.get('password')?.value === this.registerForm.get('confirmPassword')?.value
   }
 
-  get joinCode() {
-    return this.registerForm.get('join_code')
-  }
-
-  get name() {
-    return this.registerForm.get('name')
-  }
-
-  get email() {
-    return this.registerForm.get('email')
-  }
-
-  get password() {
-    return this.registerForm.get('password')
-  }
-
-  get confirmPassword() {
-    return this.registerForm.get('confirmPassword')
-  }
 }

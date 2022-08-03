@@ -5,7 +5,7 @@
         </h2>
         <p class="register__header-description">
             Đã có tài khoản?
-            <a (click)="select()" class="register__header-title-link">Đăng nhập</a>
+            <a (click)="navigateToLogin()" class="register__header-title-link">Đăng nhập</a>
         </p>
     </div>
 
@@ -32,7 +32,7 @@
                     <p class="alert">Họ và tên không được để trống</p>
                 </div>
                 <div class="register__form-error" *ngIf="validate('name', 'minlength')">
-                    <p class="alert">Tên của bạn phải có ít nhất {{name?.errors?.['minlength'].requiredLength}} ký tự</p>
+                    <p class="alert">Tên của bạn phải có ít nhất {{registerForm.get('name')?.errors?.['minlength'].requiredLength}} ký tự</p>
                 </div>
             </div>
 
@@ -62,10 +62,10 @@
                     <p class="alert">Mật khẩu không được để trống</p>
                 </div>
                 <div class="register__form-error" *ngIf="validate('password', 'minlength')">
-                    <p class="alert">Mật khẩu phải có ít nhất {{password?.errors?.['minlength'].requiredLength}} ký tự</p>
+                    <p class="alert">Mật khẩu phải có ít nhất {{registerForm.get('password')?.errors?.['minlength'].requiredLength}} ký tự</p>
                 </div>
                 <div class="register__form-error" *ngIf="validate('password', 'maxlength')">
-                    <p class="alert">Mật khẩu không được nhiều hơn {{password?.errors?.['maxlength'].requiredLength}} ký tự</p>
+                    <p class="alert">Mật khẩu không được nhiều hơn {{registerForm.get('password')?.errors?.['maxlength'].requiredLength}} ký tự</p>
                 </div>
             </div>
 
@@ -79,11 +79,11 @@
                     <p class="alert">Xác nhận mật khẩu là bắt buộc</p>
                 </div>
             </div>
-            <div class="register__form-error" *ngIf="!checkConfirmPassword() && confirmPassword?.touched">
+            <div class="register__form-error" *ngIf="!checkConfirmPassword() && registerForm.get('confirmPassword')?.touched">
                 <p class="alert">Xác nhận lại mật khẩu không trùng khớp</p>
             </div>
 
-            <button class="register__form-submit" type="button" (click)="submit()">
+            <button class="register__form-submit" type="button" (click)="submit()" [disabled]="registerForm.invalid">
                 Đăng ký
             </button>
         </form>

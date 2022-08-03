@@ -5,7 +5,7 @@
         </h2>
         <p class="login__header-description">
             Bạn là người mới?
-            <a (click)="select()" class="login__header-title-link">Đăng ký ngay</a>
+            <a (click)="navigateToRegister()" class="login__header-title-link">Đăng ký ngay</a>
         </p>
     </div>
 
@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <button class="login__form-submit" type="button" (click)="submit()">
+            <button class="login__form-submit" type="button" (click)="submit()" [disabled]="loginForm.invalid">
                 Đăng nhập
             </button>
         </form>

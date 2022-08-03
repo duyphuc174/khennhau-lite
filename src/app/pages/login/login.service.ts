@@ -20,10 +20,6 @@ export class LoginService implements OnInit {
 
   users: Register[] = []
 
-  getData() {
-    return this.http.get<Register[]>(this.url)
-  }
-
   getUsers(): Register[] {
     return this.users
   }

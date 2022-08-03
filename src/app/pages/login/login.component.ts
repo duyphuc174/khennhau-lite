@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/api.service';
-import { environment } from 'src/environments/environment';
-import { LoginService, Register } from './login.service';
+import { Account, ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-login',
@@ -14,18 +12,15 @@ export class LoginComponent implements OnInit {
 
   name = 'khennhau.com'
 
-  submitTable = false
-  submitted = false
-  susccessSubmit = false
-
   loginForm = this.fb.group({
     username: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(16)]]
   })
 
+  accounts: Account[] = []
+
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService,
     private router: Router,
     private apiService: ApiService
   ) { }
@@ -33,27 +28,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ngDoCheck(): void {
-    this.canSubmit()
-  }
-
-  select() {
+  navigateToRegister() {
     this.router.navigateByUrl('/register')
   }
 
   submit() {
-    if(this.submitTable) {
-      console.log('submitted');
-      
-    }
-  }
-
-  canSubmit() {
-    if(this.username?.errors || this.password?.errors) {
-      this.submitTable = false
-    } else {
-      this.submitTable = true
-    }
+      console.log(this.loginForm.value);
+      this.apiService.login(this.loginForm.value as Account).subscribe(console.log)
   }
 
   checkValueError(value: string) {
