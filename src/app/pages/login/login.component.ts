@@ -10,10 +10,11 @@ import { Account, ApiService } from 'src/app/api.service';
 })
 export class LoginComponent implements OnInit {
 
-  name = 'khennhau.com'
+  error?: string
+  token: any
 
   loginForm = this.fb.group({
-    username: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(16)]]
   })
 
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
   }
 
   navigateToRegister() {
@@ -33,8 +35,13 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-      console.log(this.loginForm.value);
-      this.apiService.login(this.loginForm.value as Account).subscribe(console.log)
+    this.apiService.login(this.loginForm.value as Account).subscribe({
+      next: (next: any) => {
+        this.token = next.token
+        console.log(this.token);
+      },
+      error: error => this.error = error.message,
+    })
   }
 
   checkValueError(value: string) {
@@ -46,8 +53,8 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get(value)?.errors?.[rule]
   }
 
-  get username() {
-    return this.loginForm.get('username')
+  get email() {
+    return this.loginForm.get('email')
   }
 
   get password() {

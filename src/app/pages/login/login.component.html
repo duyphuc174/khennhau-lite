@@ -1,7 +1,7 @@
 <div class="login">
     <div class="login__header">
         <h2 class="login__header-title">
-            Đăng nhập vào {{name | uppercase}}
+            Đăng nhập vào KHENNHAU.COM
         </h2>
         <p class="login__header-description">
             Bạn là người mới?
@@ -9,13 +9,13 @@
         </p>
     </div>
 
-    <div class="login__message">
-        <p class="login__message-slogan">
+    <div class="login__message" [class.error] = "error">
+        <p class="login__message-slogan" *ngIf="!error">
             Bắt đầu xây dựng văn hóa lòng biết ơn cho tổ chức của bạn ngay hôm nay
         </p>
-        <!-- <p class="login__message-error">
-            Thông tin đăng nhập không chính xác
-        </p> -->
+        <p class="login__message-error" *ngIf="error">
+            {{error}}
+        </p>
     </div>
 
     <div class="login__form">
@@ -24,13 +24,13 @@
             <label for="" class="login__form-label">
                 Email đăng nhập
             </label>
-            <input type="text" class="login__form-control" formControlName="username">
+            <input type="text" class="login__form-control" formControlName="email">
 
-            <div class="login__form-alert" *ngIf="checkValueError('username')">
-                <div class="login__form-error" *ngIf="validate('username', 'required')">
+            <div class="login__form-alert" *ngIf="checkValueError('email')">
+                <div class="login__form-error" *ngIf="validate('email', 'required')">
                     <p class="alert">Email không được để trống</p>
                 </div>
-                <div class="login__form-error" *ngIf="validate('username', 'email')">
+                <div class="login__form-error" *ngIf="validate('email', 'email')">
                     <p class="alert">Email không hợp lệ</p>
                 </div>
             </div>
@@ -58,6 +58,8 @@
             <button class="login__form-submit" type="button" (click)="submit()" [disabled]="loginForm.invalid">
                 Đăng nhập
             </button>
+
+            <!-- <span>{{token.token | json}}</span> -->
         </form>
     </div>
 </div>
