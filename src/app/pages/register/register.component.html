@@ -23,6 +23,16 @@
             </div>
 
             <label for="" class="register__form-label">
+                Nhập tên công ty/ tổ chức của bạn
+            </label>
+            <input type="text" placeholder="VD: Momtech" class="register__form-control" formControlName="organization_name">
+            <div class="register__form-alert" *ngIf="checkValueError('organization_name')">
+                <div class="register__form-error" *ngIf="validate('organization_name', 'required')">
+                    <p class="alert">Tên công ty/ tổ chức không được để trống</p>
+                </div>
+            </div>
+
+            <label for="" class="register__form-label">
                 Họ và tên
             </label>
             <input type="text" placeholder="VD: Ngô Đình Huy" class="register__form-control" formControlName="name">
@@ -81,6 +91,12 @@
             </div>
             <div class="register__form-error" *ngIf="!checkConfirmPassword() && registerForm.get('confirmPassword')?.touched">
                 <p class="alert">Xác nhận lại mật khẩu không trùng khớp</p>
+            </div>
+
+            <div *ngIf="error" class="register__form-warning">
+                <p class="register__form-error-message">
+                    {{error}}
+                </p>
             </div>
 
             <button class="register__form-submit" type="button" (click)="submit()" [disabled]="registerForm.invalid">

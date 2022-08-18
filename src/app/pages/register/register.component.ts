@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService, RegisterRequest } from 'src/app/api.service';
+import { Account, ApiService, RegisterRequest } from 'src/app/api.service';
 
 @Component({
   selector: 'app-register',
@@ -10,8 +10,12 @@ import { ApiService, RegisterRequest } from 'src/app/api.service';
 })
 export class RegisterComponent implements OnInit {
 
+  error?: string
+  
+
   registerForm = this.fb.group({
     join_code: ['', [Validators.required]],
+    organization_name: ['', [Validators.required]],
     name: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]],
@@ -32,9 +36,11 @@ export class RegisterComponent implements OnInit {
     this.router.navigateByUrl('/login')
   }
 
-  submit() {
-    console.log(this.registerForm.value);
-    this.apiService.register(this.registerForm.value as RegisterRequest).subscribe(console.log)
+  submit() {    
+    this.apiService.register(this.registerForm.value as RegisterRequest).subscribe({
+      next: () => this.navigateToLogin(),
+      error: error => this.error = error.message
+    })
   }
   
   checkValueError(value: string) {

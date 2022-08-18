@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://dev-api.khennhau.com'
+  apiUrl: 'https://dev-api.khennhau.com'
 };

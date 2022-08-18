@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { environment as env } from '../environments/environment'
 
 export interface RegisterRequest {
-  name: string
-  email: string
-  password: string
-  organization_name: string
-  join_code: string
+  "name": string
+  "email": string
+  "password": string
+  "organization_name": string
+  "join_code": string
 }
 
 export interface Account {
@@ -21,19 +21,30 @@ export interface Account {
 })
 export class ApiService {
 
-
   constructor(private http: HttpClient) { }
 
-  login(account: Account): Observable<any> {
+  login(account: Account) {
     return this.http.post(this.post('/token'), account)
+      .pipe(
+        catchError(this.handleError)
+      )
+
   }
 
-  register(post: RegisterRequest): Observable<any> {
+  register(post: RegisterRequest) {
     return this.http.post(this.post('/register'), post)
+      .pipe(
+        catchError(this.handleError)  
+      )
   }
 
   post(path: string) {
     return env.apiUrl + path
+  }
+
+  handleError(error: HttpErrorResponse) {
+    console.error(error)
+    return throwError(() => new Error(error.error.message))
   }
 
 }

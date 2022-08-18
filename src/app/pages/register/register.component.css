@@ -105,3 +105,15 @@
     color: red;
     font-size: 1.3rem;
 }
+
+.register__form-warning {
+    background-color: #FCD9E2;
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 5px;
+}
+
+.register__form-error-message {
+    color: #912741;
+    font-size: 1.4rem;
+}
